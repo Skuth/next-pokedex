@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { BaseContainer } from '../../atoms';
@@ -26,6 +27,7 @@ const Navbar: React.FC = () => {
             <ListItem>
               <LogoContainer>
                 <LogoLink href="/">
+                  <Image src="/logo.svg" alt="Pokedex Logo" width={32} height={32} />
                   Pokedex
                 </LogoLink>
               </LogoContainer>

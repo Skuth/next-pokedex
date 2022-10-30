@@ -22,6 +22,9 @@ export const LogoContainer = styled.h1`
 
 export const LogoLink = styled(Link)`
   user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 export const ListContainer = styled.ul`
