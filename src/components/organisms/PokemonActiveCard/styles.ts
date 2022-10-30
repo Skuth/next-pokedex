@@ -72,6 +72,7 @@ export const StatusContent = styled.div`
       padding: 0.25rem 0.75rem;
       background: ${(props) => transparentize(0.8, props.theme.gray)};
       border-radius: 100rem;
+      font-weight: 600;
     }
     span {
       display: block;
