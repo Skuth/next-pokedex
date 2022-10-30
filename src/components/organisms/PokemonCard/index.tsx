@@ -5,7 +5,7 @@ import { Badge } from '../../molecules';
 
 import { CardLink, Container, AvatarContainer, InfoContainer, BadgeContainer } from './styles';
 
-import { usePokemon } from '../../../hooks/pokemon';
+import { usePokemon } from '../../../store/pokemon';
 
 import { IPokemon } from '../../../interface';
 
@@ -16,7 +16,11 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({
   pokemon
 }) => {
-  const { activePokemon, selectPokemon } = usePokemon()
+  const [activePokemon, selectPokemon] = usePokemon(state => [
+    state.activePokemon,
+    state.selectPokemon
+  ])
+
 
   const handleCardClick = useCallback(() => {
     if (activePokemon.id === pokemon.id) return

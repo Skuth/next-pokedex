@@ -9,17 +9,19 @@ import { Container, AvatarContainer, InfoContainer, BadgeContainer, StatusContai
 
 import { useTheme } from 'styled-components';
 
-import { usePokemon } from '../../../hooks/pokemon';
+import { usePokemon } from '../../../store/pokemon';
 import { useFavorites } from '../../../store/favorites';
 
 const PokemonActiveCard: React.FC = () => {
   const theme = useTheme()
 
-  const { activePokemon: pokemon } = usePokemon()
+  const pokemon = usePokemon(state => state.activePokemon)
 
-  const favorites = useFavorites(state => state.favorites)
-  const addFavorite = useFavorites(state => state.addFavorite)
-  const removeFavorite = useFavorites(state => state.removeFavorite)
+  const [favorites, addFavorite, removeFavorite] = useFavorites(state => [
+    state.favorites,
+    state.addFavorite,
+    state.removeFavorite
+  ])
 
   const isPokemonFavorite = favorites.find(item => item.id === pokemon.id)
 

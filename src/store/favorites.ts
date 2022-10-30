@@ -3,14 +3,14 @@ import { persist } from "zustand/middleware";
 
 import { IPokemon } from "../interface";
 
-interface IFavorites {
+interface IFavoritesStore {
   favorites: IPokemon[];
   addFavorite: (pokemon: IPokemon) => void;
   removeFavorite: (pokemonId: string) => void;
 }
 
 const useFavorites = create(
-  persist<IFavorites>(
+  persist<IFavoritesStore>(
     (set, get) => ({
       favorites: [],
 

@@ -5,10 +5,15 @@ import { PokemonCard, PokemonActiveCard } from '../../organisms';
 
 import { Container, PokemonContainer, ActivePokemonContainer } from './styles';
 
-import { usePokemon } from '../../../hooks/pokemon';
+import { usePokemon } from '../../../store/pokemon';
 
 const Home: React.FC = () => {
-  const { isLoading, pokemonList, isActiveCardLoadgin, selectPokemon } = usePokemon()
+  const [isLoading, pokemonList, isActiveCardLoadgin, selectPokemon] = usePokemon(state => [
+    state.isLoading,
+    state.pokemonList,
+    state.isActiveCardLoadgin,
+    state.selectPokemon
+  ])
 
   useEffect(() => {
     if (!pokemonList.length) return

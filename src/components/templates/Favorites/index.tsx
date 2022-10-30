@@ -5,11 +5,17 @@ import { PokemonCard, PokemonActiveCard } from '../../organisms';
 
 import { Container, PokemonContainer, ActivePokemonContainer, EmptyContainer } from './styles';
 
-import { usePokemon } from '../../../hooks/pokemon';
+import { usePokemon } from '../../../store/pokemon';
 import { useFavorites } from '../../../store/favorites';
 
 const Favorites: React.FC = () => {
-  const { isActiveCardLoadgin, selectPokemon } = usePokemon()
+  const [isLoading, isActiveCardLoadgin, activePokemon, selectPokemon] = usePokemon(state => [
+    state.isLoading,
+    state.isActiveCardLoadgin,
+    state.activePokemon,
+    state.selectPokemon
+  ])
+
   const pokemonList = useFavorites(state => state.favorites)
 
   useEffect(() => {
@@ -21,29 +27,39 @@ const Favorites: React.FC = () => {
   return (
     <BaseContainer>
       <Container>
-        <ConditionContainer if={pokemonList.length > 0}>
+        <ConditionContainer if={!isLoading}>
+          <ConditionContainer if={pokemonList.length > 0}>
+            <PokemonContainer>
+              {pokemonList.map(pokemon => (
+                <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              ))}
+            </PokemonContainer>
+          </ConditionContainer>
+
+          <ConditionContainer if={pokemonList.length <= 0}>
+            <EmptyContainer>
+              <h2>Opss!</h2>
+              <span>Parece que ainda não tem nada por aqui</span>
+            </EmptyContainer>
+          </ConditionContainer>
+
+          <ConditionContainer if={!!(!isActiveCardLoadgin && activePokemon?.id)}>
+            <ActivePokemonContainer>
+              <PokemonActiveCard />
+            </ActivePokemonContainer>
+          </ConditionContainer>
+        </ConditionContainer>
+
+        <ConditionContainer if={isLoading}>
           <PokemonContainer>
-            {pokemonList.map(pokemon => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            {Array(16).fill(null).map((_, idx) => (
+              <Shimmer key={idx} width="100%" height="200px" />
             ))}
           </PokemonContainer>
 
           <ActivePokemonContainer>
-            <ConditionContainer if={isActiveCardLoadgin}>
-              <Shimmer width="100%" height="100%" />
-            </ConditionContainer>
-
-            <ConditionContainer if={!isActiveCardLoadgin}>
-              <PokemonActiveCard />
-            </ConditionContainer>
+            <Shimmer width="100%" height="100%" />
           </ActivePokemonContainer>
-        </ConditionContainer>
-
-        <ConditionContainer if={pokemonList.length <= 0}>
-          <EmptyContainer>
-            <h2>Opss!</h2>
-            <span>Parece que ainda não tem nada por aqui</span>
-          </EmptyContainer>
         </ConditionContainer>
       </Container>
     </BaseContainer >

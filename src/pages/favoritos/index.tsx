@@ -3,8 +3,8 @@ import { NextPage } from 'next';
 
 import { FavoritesTemplate } from '../../components/templates';
 
-const favorites: NextPage = () => {
+const Favorites: NextPage = () => {
   return <FavoritesTemplate />
 }
 
-export default favorites;
+export default Favorites;

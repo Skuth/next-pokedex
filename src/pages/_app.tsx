@@ -1,20 +1,33 @@
-import { AppProps } from "next/app"
+import { useEffect } from "react"
 import Head from "next/head"
+import { AppProps } from "next/app"
 
 import { ThemeProvider } from "styled-components"
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
-import { AppProvider } from "../hooks"
 
 import { GlobalStyle } from "../styles/globals"
 import { theme } from "../styles/Theme"
 
 import { Navbar } from "../components/organisms"
 
-const queryClient = new QueryClient()
+import { usePokemon } from "../store/pokemon"
 
-export default function App({ Component, pageProps }: AppProps) {
+import { api } from "../services"
+
+import { IPokemon } from "../interface"
+
+interface AppPropsInterface extends AppProps {
+  pokemonList: IPokemon[]
+}
+
+const App = ({ Component, pageProps, pokemonList }: AppPropsInterface) => {
+  const setPokemonList = usePokemon(state => state.setPokemonList)
+
+  useEffect(() => {
+    if (!pokemonList.length) return
+
+    setPokemonList(pokemonList)
+  }, [pokemonList, setPokemonList])
+
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -29,12 +42,18 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <GlobalStyle />
 
-      <QueryClientProvider client={queryClient}>
-        <AppProvider>
-          <Navbar />
-          <Component {...pageProps} />
-        </AppProvider>
-      </QueryClientProvider>
+      <Navbar />
+      <Component {...pageProps} />
     </ThemeProvider>
   )
 }
+
+App.getInitialProps = async (): Promise<{ pokemonList: IPokemon[] }> => {
+  const response = await api.getPokemonList()
+
+  return {
+    pokemonList: response || []
+  }
+}
+
+export default App
