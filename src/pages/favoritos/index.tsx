@@ -6,11 +6,11 @@ import { FavoritesTemplate } from '../../components/templates';
 import { usePokemon } from '../../store/pokemon';
 
 const Favorites: NextPage = () => {
-  const getPokemonList = usePokemon(state => state.getPokemonList)
+  const setLoading = usePokemon(state => state.setLoading)
 
   useEffect(() => {
-    getPokemonList()
-  }, [getPokemonList])
+    setLoading(false)
+  }, [setLoading])
 
   return <FavoritesTemplate />
 }

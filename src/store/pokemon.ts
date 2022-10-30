@@ -11,6 +11,7 @@ interface IPokemonStore {
   activePokemon: IPokemon;
   getPokemonList: () => Promise<void>;
   selectPokemon: (pokemon: IPokemon) => void;
+  setLoading: (state: boolean) => void;
 }
 
 const usePokemon = create<IPokemonStore>((set, get) => ({
@@ -48,6 +49,13 @@ const usePokemon = create<IPokemonStore>((set, get) => ({
         isActiveCardLoadgin: false,
       });
     }, 250);
+  },
+
+  setLoading(state) {
+    set({
+      isLoading: state,
+      isActiveCardLoadgin: state,
+    });
   },
 }));
 
