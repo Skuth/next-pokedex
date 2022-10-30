@@ -1,0 +1,64 @@
+{
+  "editor.rulers": [120, 140],
+  "editor.formatOnSave": true,
+
+  "files.eol": "\n",
+
+  "eslint.packageManager": "yarn",
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.format": true
+  },
+
+  "files.associations": {
+    ".sequelizerc": "javascript",
+    ".stylelintrc": "json",
+    ".prettierrc": "json"
+  },
+
+  "editor.renderLineHighlight": "gutter",
+
+  "editor.tabSize": 2,
+
+  "material-icon-theme.folders.associations": {
+    "infra": "app",
+    "entities": "class",
+    "domain": "class",
+    "schemas": "class",
+    "typeorm": "database",
+    "repositories": "mappings",
+    "http": "container",
+    "migration": "tools",
+    "modules": "components",
+    "implementations": "core",
+    "dtos": "typescript",
+    "fakes": "mock",
+    "websockets": "pipe",
+    "protos": "pipe",
+    "grpc": "pipe",
+    "providers": "include",
+    "subscribers": "messages",
+    "useCases": "controller",
+    "kafka": "scripts",
+    "mappers": "meta",
+    "_shared": "shared",
+    "eslint-config": "tools",
+    "bosons": "components",
+    "quarks": "components",
+    "atoms": "components",
+    "molecules": "components",
+    "organisms": "components",
+    "templates": "components",
+    "pages": "components",
+    "store": "context"
+  },
+
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  }
+}
