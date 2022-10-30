@@ -16,11 +16,13 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({
   pokemon
 }) => {
-  const { selectPokemon } = usePokemon()
+  const { activePokemon, selectPokemon } = usePokemon()
 
   const handleCardClick = useCallback(() => {
+    if (activePokemon.id === pokemon.id) return
+
     selectPokemon(pokemon.id)
-  }, [pokemon, selectPokemon])
+  }, [activePokemon, pokemon, selectPokemon])
 
   return (
     <CardLink onClick={handleCardClick} className="fadeIn">
