@@ -20,6 +20,10 @@ const PaginateButton: React.FC<PaginateButtonProps> = ({
       width="42px"
       height="42px"
       bgColor={isActive ? "primary" : "gray"}
+      {...!isActive && {
+        bgTransparentize: 0.6,
+        textColor: "textColor"
+      }}
       {...rest}
     >
       <p>{text}</p>

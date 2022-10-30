@@ -1,17 +1,17 @@
 import styled, { css } from "styled-components";
 import { darken, transparentize } from "polished";
 
-import { BaseColorTheme } from "../../../styles/Theme";
+import { Theme } from "../../../styles/Theme";
 
 export interface ContainerProps {
   width?: string;
   height?: string;
   padding?: string | `${string} ${string}`;
   borderRadius?: string;
-  bgColor?: keyof BaseColorTheme;
+  bgColor?: keyof Theme;
   bgTransparentize?: number;
   bgHoverDarken?: number;
-  textColor?: keyof BaseColorTheme;
+  textColor?: keyof Theme;
 }
 
 export const Container = styled.button<ContainerProps>`

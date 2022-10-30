@@ -23,7 +23,6 @@ const theme = {
 };
 
 type Theme = typeof theme;
-type BaseColorTheme = typeof baseColor;
 
 export { theme };
-export type { Theme, BaseColorTheme };
+export type { Theme };
