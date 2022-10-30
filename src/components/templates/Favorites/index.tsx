@@ -43,7 +43,7 @@ const Favorites: React.FC = () => {
             </EmptyContainer>
           </ConditionContainer>
 
-          <ConditionContainer if={!!(!isActiveCardLoadgin && activePokemon?.id)}>
+          <ConditionContainer if={!!(!isActiveCardLoadgin && activePokemon?.id && pokemonList.length > 0)}>
             <ActivePokemonContainer>
               <PokemonActiveCard />
             </ActivePokemonContainer>
