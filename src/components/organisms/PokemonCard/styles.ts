@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardLink = styled.button`
+export const CardLink = styled.div`
   cursor: pointer !important;
 `;
 
@@ -8,8 +8,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  overflow: visible;
 
   color: ${(props) => props.theme.textColor};
 `;

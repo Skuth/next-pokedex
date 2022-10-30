@@ -25,7 +25,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   }, [activePokemon, pokemon, selectPokemon])
 
   return (
-    <CardLink onClick={handleCardClick} className="fadeIn">
+    <CardLink role="button" onClick={handleCardClick} className="fadeIn">
       <Card hasHover hasShadow>
         <Container>
           <AvatarContainer>
