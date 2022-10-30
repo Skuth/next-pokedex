@@ -23,6 +23,8 @@ export default function App({ Component, pageProps }: AppProps) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
+
+        <title>Next.js - Pokedex</title>
       </Head>
 
       <GlobalStyle />
