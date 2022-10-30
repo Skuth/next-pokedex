@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { IPokemon } from "../interface";
 
-const url = process.env.VERCEL_URL ?? "http://localhost:3000";
+const url = process.env.API_URL ?? "http://localhost:3000";
 
 const service = axios.create({
   baseURL: `${url}/api`,
