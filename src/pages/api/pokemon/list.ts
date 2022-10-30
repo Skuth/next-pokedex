@@ -3,8 +3,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { pokemonTypeColors } from "../../../data";
 
 import { IPokemon } from "../../../interface";
+import { ApiResponse } from "../../../interface/api";
 
-const api = async (req: NextApiRequest, res: NextApiResponse<IPokemon[]>) => {
+const api = async (
+  req: NextApiRequest,
+  res: NextApiResponse<ApiResponse<"pokemon", IPokemon[]>>
+) => {
   const page = Number(req.query.page ?? 1);
   const paginate = Number(req.query.paginate ?? 16);
 
@@ -41,10 +45,19 @@ const api = async (req: NextApiRequest, res: NextApiResponse<IPokemon[]>) => {
     })
     .catch(() => ({} as IPokemon[]));
 
-  const start = (page - 1) * paginate + (page !== 1 ? 1 : 0);
-  const end = page * paginate;
+  const total = response?.length || 0;
 
-  res.status(200).json(response.slice(start, end));
+  const start = (page - 1) * paginate + (page <= 1 ? 1 : 0);
+  const end = page * paginate + (page <= 1 ? 1 : 0);
+
+  const nextPage = Math.ceil(total / paginate);
+
+  res.status(200).json({
+    total,
+    hasNextPage: nextPage > page,
+    hasPrevPage: page > 1,
+    pokemon: response.slice(start, end),
+  });
 };
 
 export default api;

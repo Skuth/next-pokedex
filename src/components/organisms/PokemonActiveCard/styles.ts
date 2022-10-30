@@ -20,19 +20,10 @@ export const AvatarContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  > button {
+  > .button--fav {
     position: absolute;
     right: 10px;
     top: 50px;
-
-    width: 48px;
-    height: 48px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 100rem;
-    background: ${(props) => transparentize(0.9, props.theme.gray)};
   }
 `;
 

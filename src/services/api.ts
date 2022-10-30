@@ -1,11 +1,21 @@
-import { IPokemon } from "../interface";
+import { IPokemon, ApiResponse } from "../interface";
 
-const getPokemonList = async (): Promise<IPokemon[]> => {
-  const response: IPokemon[] = await fetch(
-    "/api/pokemon/list?page=1&paginate=100"
+type GetPokemonListResponse = ApiResponse<"pokemon", IPokemon[]>;
+
+interface GetPokemonListProps {
+  page?: number;
+  paginate?: number;
+}
+
+const getPokemonList = async ({
+  page = 1,
+  paginate = 15,
+}: GetPokemonListProps): Promise<GetPokemonListResponse> => {
+  const response: GetPokemonListResponse = await fetch(
+    `/api/pokemon/list?page=${page}&paginate=${paginate}`
   )
     .then((res) => res.json())
-    .catch(() => []);
+    .catch(() => ({} as GetPokemonListResponse));
 
   return response;
 };

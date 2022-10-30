@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 
-import { Card, Avatar } from '../../atoms';
-import { Badge } from '../../molecules';
+import { Card, Avatar, Button, Badge } from '../../atoms';
 
 import { Container, AvatarContainer, InfoContainer, BadgeContainer, StatusContainer, StatusContent } from './styles';
 
@@ -47,13 +46,21 @@ const PokemonActiveCard: React.FC = () => {
             src={pokemon.image.thumbnail}
           />
 
-          <button
+          <Button
+            className="button--fav"
             type="button"
-            aria-label='Favorite'
+            aria-label="Favorite"
+            padding="0"
+            width="48px"
+            height="48px"
+            bgColor="gray"
+            bgTransparentize={0.9}
+            bgHoverDarken={0.5}
+            borderRadius="100rem"
             onClick={handleFavoriteClick}
           >
             <IconState color={IconColor} size={22} />
-          </button>
+          </Button>
         </AvatarContainer>
 
         <InfoContainer>

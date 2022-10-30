@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { Card, Avatar } from '../../atoms';
-import { Badge } from '../../molecules';
+import { Card, Avatar, Badge } from '../../atoms';
 
 import { CardLink, Container, AvatarContainer, InfoContainer, BadgeContainer } from './styles';
 

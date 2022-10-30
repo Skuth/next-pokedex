@@ -7,9 +7,14 @@ import { IPokemon } from "../interface";
 interface IPokemonStore {
   isLoading: boolean;
   pokemonList: IPokemon[];
+  total: number;
+  hastNextPage: boolean;
+  hasPrevPage: boolean;
+
   isActiveCardLoadgin: boolean;
   activePokemon: IPokemon;
-  getPokemonList: () => Promise<void>;
+
+  getPokemonList: (page?: number, paginate?: number) => Promise<void>;
   selectPokemon: (pokemon: IPokemon) => void;
   setLoading: (state: boolean) => void;
 }
@@ -17,19 +22,31 @@ interface IPokemonStore {
 const usePokemon = create<IPokemonStore>((set, get) => ({
   isLoading: true,
   pokemonList: [],
+  total: 0,
+  hastNextPage: false,
+  hasPrevPage: false,
+
   isActiveCardLoadgin: true,
   activePokemon: {} as IPokemon,
 
-  async getPokemonList() {
+  async getPokemonList(page = 1, paginate = 15) {
     set({
       isLoading: true,
     });
 
-    const response: IPokemon[] = await api.getPokemonList();
+    const response = await api.getPokemonList({
+      page,
+      paginate,
+    });
+
+    if (!response) return;
 
     set({
       isLoading: false,
-      pokemonList: response || {},
+      pokemonList: response?.pokemon || [],
+      total: response?.total || 0,
+      hastNextPage: response?.hasNextPage || false,
+      hasPrevPage: response?.hasPrevPage || false,
     });
   },
 

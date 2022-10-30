@@ -5,3 +5,5 @@
   alt="Atomic Design System"
   width="100%"
 />
+
+[Atomic Design : Methodology for more cohesive, consistent user experiences](https://blog.prototypr.io/atomic-design-methodology-for-more-cohesive-consistent-user-experiences-6fbc14bfede4)
