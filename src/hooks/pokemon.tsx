@@ -22,7 +22,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({
   children = undefined
 }) => {
   const { isLoading, data: pokemonList = [] } = useQuery(["pokemonList"], (): Promise<IPokemon[]> =>
-    fetch("http://localhost:3000/api/pokemon/list?page=1&paginate=100")
+    fetch("/api/pokemon/list?page=1&paginate=100")
       .then(res => res.json())
       .catch(() => ({} as IPokemon[]))
   )
