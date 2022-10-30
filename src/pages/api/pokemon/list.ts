@@ -47,8 +47,8 @@ const api = async (
 
   const total = response?.length || 0;
 
-  const start = (page - 1) * paginate + (page <= 1 ? 1 : 0);
-  const end = page * paginate + (page <= 1 ? 1 : 0);
+  const start = (page - 1) * paginate;
+  const end = page * paginate;
 
   const nextPage = Math.ceil(total / paginate);
 
