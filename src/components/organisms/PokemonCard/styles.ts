@@ -9,6 +9,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
+  overflow: visible;
+
   color: ${(props) => props.theme.textColor};
 `;
 

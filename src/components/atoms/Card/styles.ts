@@ -14,6 +14,8 @@ export const Container = styled.div<ContainerProps>`
   padding: 2rem 1rem;
   border-radius: ${(props) => props.theme.borderRadius};
 
+  overflow: visible;
+
   ${(props) =>
     props.hasShadow &&
     css`
