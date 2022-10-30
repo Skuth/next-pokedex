@@ -1,5 +1,7 @@
 import create from "zustand";
 
+import { api } from "../services";
+
 import { IPokemon } from "../interface";
 
 interface IPokemonStore {
@@ -7,8 +9,8 @@ interface IPokemonStore {
   pokemonList: IPokemon[];
   isActiveCardLoadgin: boolean;
   activePokemon: IPokemon;
-  setPokemonList: (pokemonList: IPokemon[]) => void;
-  selectPokemon: (id: string) => void;
+  getPokemonList: () => Promise<void>;
+  selectPokemon: (pokemon: IPokemon) => void;
 }
 
 const usePokemon = create<IPokemonStore>((set, get) => ({
@@ -17,25 +19,25 @@ const usePokemon = create<IPokemonStore>((set, get) => ({
   isActiveCardLoadgin: true,
   activePokemon: {} as IPokemon,
 
-  setPokemonList(pokemonList) {
+  async getPokemonList() {
     set({
-      pokemonList,
+      isLoading: true,
+    });
+
+    const response: IPokemon[] = await api.getPokemonList();
+
+    set({
       isLoading: false,
-      isActiveCardLoadgin: false,
+      pokemonList: response || {},
     });
   },
 
-  selectPokemon(pokemonId) {
-    if (!get().pokemonList.length) return;
-    if (get().isActiveCardLoadgin) return;
-
+  selectPokemon(pokemon) {
     set({
       isActiveCardLoadgin: true,
     });
 
-    const activePokemon =
-      get().pokemonList.find((pokemon) => pokemon.id === pokemonId) ||
-      ({} as IPokemon);
+    const activePokemon = pokemon || ({} as IPokemon);
 
     set({
       activePokemon,

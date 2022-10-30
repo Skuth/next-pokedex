@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import Head from "next/head"
 import { AppProps } from "next/app"
 
@@ -9,25 +8,7 @@ import { theme } from "../styles/Theme"
 
 import { Navbar } from "../components/organisms"
 
-import { usePokemon } from "../store/pokemon"
-
-import { api } from "../services"
-
-import { IPokemon } from "../interface"
-
-interface AppPropsInterface extends AppProps {
-  pokemonList: IPokemon[]
-}
-
-const App = ({ Component, pageProps, pokemonList }: AppPropsInterface) => {
-  const setPokemonList = usePokemon(state => state.setPokemonList)
-
-  useEffect(() => {
-    if (!pokemonList.length) return
-
-    setPokemonList(pokemonList)
-  }, [pokemonList, setPokemonList])
-
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -46,14 +27,6 @@ const App = ({ Component, pageProps, pokemonList }: AppPropsInterface) => {
       <Component {...pageProps} />
     </ThemeProvider>
   )
-}
-
-App.getInitialProps = async (): Promise<{ pokemonList: IPokemon[] }> => {
-  const response = await api.getPokemonList()
-
-  return {
-    pokemonList: response || []
-  }
 }
 
 export default App

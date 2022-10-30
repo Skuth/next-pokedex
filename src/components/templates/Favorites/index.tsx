@@ -21,7 +21,7 @@ const Favorites: React.FC = () => {
   useEffect(() => {
     if (!pokemonList.length) return
 
-    selectPokemon(pokemonList[0].id)
+    selectPokemon(pokemonList[0])
   }, [pokemonList, selectPokemon])
 
   return (

@@ -25,7 +25,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   const handleCardClick = useCallback(() => {
     if (activePokemon.id === pokemon.id) return
 
-    selectPokemon(pokemon.id)
+    selectPokemon(pokemon)
   }, [activePokemon, pokemon, selectPokemon])
 
   return (
